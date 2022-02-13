@@ -65,7 +65,7 @@ export default function Login() {
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
         console.log("login successful")
-				nav('/');
+				nav('/dashboard');
 			});
 	};
 
