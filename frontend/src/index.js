@@ -19,6 +19,7 @@ const routing = (
       <Routes>
         <Route exact path="/" element={<App />}/>
         <Route exact path="/login" element={<Login />}/>
+        <Route exact path="/register" element={<Register />}/>
       </Routes>
   </BrowserRouter>
 );
