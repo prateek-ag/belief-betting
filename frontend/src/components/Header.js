@@ -21,10 +21,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Header() {
+function Header(props) {
+	console.log(props.state)
+	const {
+		isLoggedIn: [isLoggedIn, setLogin]
+	  } = {
+		count: useState(false),
+		...(props.state || {})
+	  };
 	const classes = useStyles();
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	useEffect(() => {setIsLoggedIn(localStorage.getItem("is_logged_in"))});
 	console.log(isLoggedIn)
 
 	let buttonGroup;

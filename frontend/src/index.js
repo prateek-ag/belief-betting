@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter,
@@ -26,7 +26,23 @@ const routing = (
   </BrowserRouter>
 );
 
-ReactDOM.render(routing, document.getElementById('root'));
+function Index() {
+  const [isLoggedIn, setLogin] = useState(false)
+
+  return (
+    <BrowserRouter>
+    <Header state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>
+        <Routes>
+          <Route exact path="/" element={<App />}/>
+          <Route exact path="/login" element={<Login state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}/>
+          <Route exact path="/register" element={<Register />}/>
+          <Route exact path="/dashboard" element={<Dashboard />}/>
+        </Routes>
+    </BrowserRouter>
+  );
+}
+
+ReactDOM.render(<Index />, document.getElementById('root'));
 
 // import reportWebVitals from './reportWebVitals';
 
