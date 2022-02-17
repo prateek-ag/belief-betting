@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Header(props) {
-	console.log(props.state)
 	const {
 		isLoggedIn: [isLoggedIn, setLogin]
 	  } = {
