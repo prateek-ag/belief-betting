@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,8 +20,65 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+
 function Header() {
 	const classes = useStyles();
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	useEffect(() => {setIsLoggedIn(localStorage.getItem("is_logged_in"))});
+	console.log(isLoggedIn)
+
+	let buttonGroup;
+	if (isLoggedIn) {
+		buttonGroup = 
+		<React.Fragment>
+					<Button
+						href="#"
+						color="primary"
+						variant="outlined"
+						className={classes.link}
+						component={NavLink}
+						to="/dashboard"
+					>
+						Dashboard
+					</Button>
+					<Button
+						href="#"
+						color="primary"
+						variant="outlined"
+						className={classes.link}
+						component={NavLink}
+						to="/logout"
+					>
+						Logout
+					</Button>
+		</React.Fragment>
+	} else {
+		buttonGroup = 
+		<React.Fragment>
+					<Button
+						href="#"
+						color="primary"
+						variant="outlined"
+						className={classes.link}
+						component={NavLink}
+						to="/register"
+					>
+						Register
+					</Button>
+					<Button
+						href="#"
+						color="primary"
+						variant="outlined"
+						className={classes.link}
+						component={NavLink}
+						to="/login"
+					>
+						Login
+					</Button>
+		</React.Fragment>
+	}
+
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -44,39 +101,11 @@ function Header() {
 							underline="none"
 							color="textPrimary"
 						>
-							Blog
+							Prateek's Project
 						</Link>
 					</Typography>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
-						component={NavLink}
-						to="/register"
-					>
-						Register
-					</Button>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
-						component={NavLink}
-						to="/login"
-					>
-						Login
-					</Button>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
-						component={NavLink}
-						to="/logout"
-					>
-						Logout
-					</Button>
+
+					{buttonGroup}
 				</Toolbar>
 			</AppBar>
 		</React.Fragment>

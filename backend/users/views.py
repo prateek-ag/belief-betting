@@ -9,6 +9,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 # Create your views here.
 
 class CustomUserRegister(APIView):
+    """
+    Register a new user
+    """
     permission_classes = [AllowAny,]
 
     def post(self, request):
@@ -20,6 +23,9 @@ class CustomUserRegister(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CustomUserDashboard(APIView):
+    """
+    Get user info
+    """
     permission_classes = [IsAuthenticated,]
 
     def get(self, request):
