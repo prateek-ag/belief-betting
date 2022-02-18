@@ -13,30 +13,26 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard'
 import Header from './components/Header';
-
-const routing = (
-  <BrowserRouter>
-  <Header />
-      <Routes>
-        <Route exact path="/" element={<App />}/>
-        <Route exact path="/login" element={<Login />}/>
-        <Route exact path="/register" element={<Register />}/>
-        <Route exact path="/dashboard" element={<Dashboard />}/>
-      </Routes>
-  </BrowserRouter>
-);
+import Events from './components/Events'
+import Logout from './components/Logout'
 
 function Index() {
-  const [isLoggedIn, setLogin] = useState(false)
+  const [isLoggedIn, setLogin] = useState(localStorage.getItem("is_logged_in"))
 
   return (
     <BrowserRouter>
     <Header state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>
         <Routes>
           <Route exact path="/" element={<App />}/>
-          <Route exact path="/login" element={<Login state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}/>
-          <Route exact path="/register" element={<Register />}/>
+
+          <Route exact path="/login" element={<Login state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}>
+            <Route path='/login/failed_login' element={<p>Username or password incorrect</p>} />
+          </Route>
+
+          <Route exact path="/logout" element={<Logout state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}/>
+          <Route exact path="/register" element={<Register state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}/>
           <Route exact path="/dashboard" element={<Dashboard />}/>
+          <Route exact path="/events" element={<Events />}/>
         </Routes>
     </BrowserRouter>
   );

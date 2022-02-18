@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use(
 
 		if (
 			error.response.status === 401 &&
-			originalRequest.url === baseURL + 'token/refresh/'
+			originalRequest.url === baseURL + 'user/token/refresh/'
 		) {
 			window.location.href = '/login/';
 			return Promise.reject(error);
@@ -54,7 +54,7 @@ axiosInstance.interceptors.response.use(
 
 				if (tokenParts.exp > now) {
 					return axiosInstance
-						.post('/token/refresh/', { refresh: refreshToken })
+						.post('user/token/refresh/', { refresh: refreshToken })
 						.then((response) => {
 							localStorage.setItem('access_token', response.data.access);
 							localStorage.setItem('refresh_token', response.data.refresh);
@@ -71,6 +71,7 @@ axiosInstance.interceptors.response.use(
 						});
 				} else {
 					console.log('Refresh token is expired', tokenParts.exp, now);
+					localStorage.setItem("is_logged_in", 0)
 					window.location.href = '/login/';
 				}
 			} else {

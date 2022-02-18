@@ -22,17 +22,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Header(props) {
-	const {
-		isLoggedIn: [isLoggedIn, setLogin]
-	  } = {
-		count: useState(false),
-		...(props.state || {})
-	  };
+	const {isLoggedIn: [isLoggedIn, setLogin]} = {...(props.state)};
 	const classes = useStyles();
 	console.log(isLoggedIn)
+	console.log(isLoggedIn == 1)
 
 	let buttonGroup;
-	if (isLoggedIn) {
+	if (isLoggedIn == 1) {
 		buttonGroup = 
 		<React.Fragment>
 					<Button

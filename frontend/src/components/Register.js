@@ -33,7 +33,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Login() {
+export default function Register(props) {
+
+	const {
+		isLoggedIn: [isLoggedIn, setLogin]
+	  } = {
+		...(props.state)
+	  };
+
 	const nav = useNavigate();
 	const initialFormData = Object.freeze({
 		email: '',
@@ -64,10 +71,10 @@ export default function Login() {
 			.then((res) => {
 				localStorage.setItem('access_token', res.data.access);
 				localStorage.setItem('refresh_token', res.data.refresh);
-				localStorage.setItem('is_logged_in', true)
+				localStorage.setItem('is_logged_in', 1)
+				setLogin(1)
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
-        console.log("registration successful")
 				nav('/');
 			});
 	};

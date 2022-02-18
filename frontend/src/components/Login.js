@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosInstance from "../axios";
 import { useNavigate } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -37,12 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login(props) {
 
-	const {
-		isLoggedIn: [isLoggedIn, setLogin]
-	  } = {
-		count: useState(false),
-		...(props.state || {})
-	  };
+	const {isLoggedIn: [isLoggedIn, setLogin]} = {...(props.state)};
 
 	const nav = useNavigate();
 	const initialFormData = Object.freeze({
@@ -70,11 +66,15 @@ export default function Login(props) {
 			.then((res) => {
 				localStorage.setItem('access_token', res.data.access);
 				localStorage.setItem('refresh_token', res.data.refresh);
-				setLogin(true)
+				setLogin(1)
+				localStorage.setItem("is_logged_in", 1)
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
 				nav('/dashboard');
-			});
+			})
+			.catch(error => {
+                nav('failed_login')
+            });
 	};
 
 	const classes = useStyles();
@@ -140,6 +140,7 @@ export default function Login(props) {
 					</Grid>
 				</form>
 			</div>
+			<Outlet />
 		</Container>
 	);
 }

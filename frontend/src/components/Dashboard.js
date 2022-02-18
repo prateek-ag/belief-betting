@@ -14,7 +14,6 @@ function Dashboard() {
 				setName(res.data.first_name + res.data.last_name)
 			})
             .catch(error => {
-                console.log(error)
                 nav('/login')
             });
     })
