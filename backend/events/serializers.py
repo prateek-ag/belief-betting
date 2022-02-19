@@ -6,8 +6,12 @@ from rest_framework.reverse import reverse
 
 
 
-class EventSerializer(serializers.ModelSerializer):
-    
+class EventSummarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('id', 'name', 'description', 'start_date', 'end_date', 'updated_on', 'created_on', 'category', 'true_label', 'false_label')
+        fields = ('id', 'name', 'start_date', 'end_date', 'category', 'true_price', 'false_price', 'volume')
+
+class EventDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'

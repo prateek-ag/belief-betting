@@ -26,7 +26,7 @@ function Index() {
           <Route exact path="/" element={<App />}/>
 
           <Route exact path="/login" element={<Login state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}>
-            <Route path='/login/failed_login' element={<p>Username or password incorrect</p>} />
+            <Route path='failed_login' element={<p>Username or password incorrect</p>} />
           </Route>
 
           <Route exact path="/logout" element={<Logout state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}/>

@@ -116,6 +116,7 @@ export default function Login(props) {
 						control={<Checkbox value="remember" color="primary" />}
 						label="Remember me"
 					/>
+					<Outlet />
 					<Button
 						type="submit"
 						fullWidth
@@ -140,7 +141,6 @@ export default function Login(props) {
 					</Grid>
 				</form>
 			</div>
-			<Outlet />
 		</Container>
 	);
 }
