@@ -1,9 +1,5 @@
 from rest_framework import serializers
 from events.models import Event
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-
 
 
 class EventSummarySerializer(serializers.ModelSerializer):

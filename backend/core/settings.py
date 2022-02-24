@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Internal
     'users',
     'events',
+    'orders'
 ]
 
 MIDDLEWARE = [

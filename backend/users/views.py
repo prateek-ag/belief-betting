@@ -20,7 +20,7 @@ class CustomUserRegister(APIView):
             user = serializer.save()
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CustomUserDashboard(APIView):
     """
@@ -29,4 +29,5 @@ class CustomUserDashboard(APIView):
     permission_classes = [IsAuthenticated,]
 
     def get(self, request):
+        print(request.user)
         return Response(data={"first_name": request.user.first_name, "last_name": request.user.last_name}, status=status.HTTP_200_OK)

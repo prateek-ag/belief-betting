@@ -40,11 +40,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=150, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    funds = models.DecimalField(max_digits=99, decimal_places=2, default=0)
 
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    def update_funds(self, amount):
+        self.funds += amount
+        self.save(update_fields=['funds'])
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
