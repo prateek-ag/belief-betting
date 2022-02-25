@@ -57,5 +57,6 @@ class Order(models.Model):
                 user.update_funds(amount)
         except IntegrityError:
             raise ValueError("This order cannot be filled.")
+            
 
 

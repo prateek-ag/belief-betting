@@ -11,7 +11,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     # Custom initializer to define system calculated values for the order
     def __init__(self, *args, user, data, **kwargs):
-        data['user'] = user
+        data['user'] = None
         data['pending_quantity'] = data['quantity']
         data['system_price'] = self.get_system_price(data)
         data["system_direction"] = self.get_system_direction(data)
