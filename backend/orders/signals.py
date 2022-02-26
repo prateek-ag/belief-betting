@@ -18,7 +18,8 @@ def order_post_save(sender, instance, *args, **kwargs):
 
     matching_query = """SELECT * FROM orders_order WHERE
                             completed = false AND event = %(e)s 
-                            AND system_direction = %(m_sd)s AND system_price <= %(sp)s
+                            AND system_direction = %(m_sd)s AND 
+                            ((system_price <= %(sp)s AND %(sd)s = 1) OR (system_price >= %(sp)s AND %(sd)s = -1))
                         ORDER BY 
                             system_price, time"""
     
