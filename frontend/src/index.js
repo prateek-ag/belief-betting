@@ -13,7 +13,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard'
 import Header from './components/Header';
-import Events from './components/Events'
+import Events from './components/EventsList'
+import Event from './components/Event'
 import Logout from './components/Logout'
 
 function Index() {
@@ -22,6 +23,7 @@ function Index() {
   return (
     <BrowserRouter>
     <Header state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>
+    
         <Routes>
           <Route exact path="/" element={<App />}/>
 
@@ -33,6 +35,7 @@ function Index() {
           <Route exact path="/register" element={<Register state={{ isLoggedIn: [isLoggedIn, setLogin] }}/>}/>
           <Route exact path="/dashboard" element={<Dashboard />}/>
           <Route exact path="/events" element={<Events />}/>
+          <Route exact path="/event/:eventID" element={<Event />}/>
         </Routes>
     </BrowserRouter>
   );

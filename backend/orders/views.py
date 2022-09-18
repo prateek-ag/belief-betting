@@ -14,12 +14,15 @@ class PlaceOrder(APIView):
     serializer = None
 
     def post(self, request):
-        serializer = OrderSerializer(data=request.data, user=request.user)
+        serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
             order = serializer.save()
             if order:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
 
 class TestView(APIView):
     permission_classes = [AllowAny,]
